@@ -1,71 +1,59 @@
-/* ARQUIVO: css/style.css */
+/* ARQUIVO: css/style.css (COMPLETO E CORRIGIDO) */
 
 /* ========================================= */
 /* 1. DESIGN SYSTEM (VARIÁVEIS GLOBAIS)      */
 /* ========================================= */
 :root {
-    /* Paleta de Cores (Exemplo de paleta para ONG) */
-    --cor-primaria: #007BFF;       /* Azul vibrante (links, botões) */
-    --cor-primaria-escura: #0056b3; /* Para hover de botões */
-    --cor-secundaria: #28a745;     /* Verde (sucesso, doações) */
-    --cor-alerta: #ffc107;         /* Amarelo (avisos) */
-    --cor-perigo: #dc3545;         /* Vermelho (erros) */
+    --cor-primaria: #007BFF;
+    --cor-primaria-escura: #0056b3;
+    --cor-secundaria: #28a745;
+    --cor-alerta: #ffc107;
+    --cor-perigo: #dc3545;
     
-    --cor-neutra-clara: #f8f9fa;   /* Fundo do site */
-    --cor-neutra-media: #dee2e6;   /* Bordas, divisores */
-    --cor-neutra-escura: #343a40;  /* Texto principal */
-    --cor-branca: #ffffff;         /* Branco puro */
+    --cor-neutra-clara: #f8f9fa;
+    --cor-neutra-media: #dee2e6;
+    --cor-neutra-escura: #343a40;
+    --cor-branca: #ffffff;
 
-    /* Tipografia Hierárquica (5 tamanhos) */
-    --fonte-titulo-xl: 3.0rem;    /* 48px - Para H1 principal */
-    --fonte-titulo-lg: 2.0rem;    /* 32px - Para H2 */
-    --fonte-titulo-md: 1.5rem;    /* 24px - Para H3 */
-    --fonte-corpo-md: 1.0rem;     /* 16px - Texto padrão (base) */
-    --fonte-corpo-sm: 0.875rem;   /* 14px - Texto pequeno (legendas) */
+    --fonte-titulo-xl: 3.0rem;
+    --fonte-titulo-lg: 2.0rem;
+    --fonte-titulo-md: 1.5rem;
+    --fonte-corpo-md: 1.0rem;
+    --fonte-corpo-sm: 0.875rem;
     
-    /* Sistema de Espaçamento Modular (Base 8px) */
-    --espaco-xs: 0.5rem;   /* 8px */
-    --espaco-sm: 1.0rem;   /* 16px */
-    --espaco-md: 1.5rem;   /* 24px */
-    --espaco-lg: 2.0rem;   /* 32px */
-    --espaco-xl: 3.0rem;   /* 48px */
-    --espaco-xxl: 4.0rem;  /* 64px */
+    --espaco-xs: 0.5rem;
+    --espaco-sm: 1.0rem;
+    --espaco-md: 1.5rem;
+    --espaco-lg: 2.0rem;
+    --espaco-xl: 3.0rem;
+    --espaco-xxl: 4.0rem;
 }
 
 /* ========================================= */
 /* 2. RESET BÁSICO E ESTILOS GLOBAIS         */
 /* ========================================= */
 * {
-    /* Garante que padding e bordas não afetem o tamanho total do elemento */
     box-sizing: border-box; 
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: Arial, sans-serif; /* Define uma fonte padrão */
-    font-size: var(--fonte-corpo-md); /* Usa a variável de tamanho de fonte */
-    color: var(--cor-neutra-escura); /* Usa a variável de cor de texto */
-    background-color: var(--cor-neutra-clara); /* Usa a variável de cor de fundo */
-    line-height: 1.6; /* Melhora a legibilidade */
-
-    /* REQUISITO: Implementar leiaute principal usando CSS grid 
-      Vamos usar Grid para o leiaute geral do corpo da página.
-    */
+    font-family: Arial, sans-serif;
+    font-size: var(--fonte-corpo-md);
+    color: var(--cor-neutra-escura);
+    background-color: var(--cor-neutra-clara);
+    line-height: 1.6;
     display: grid;
-    /* Define 3 áreas: cabeçalho, conteúdo principal e rodapé */
     grid-template-rows: auto 1fr auto; 
-    min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura total da tela */
+    min-height: 100vh;
 }
 
-/* Limitador de largura:
-   Impede que o conteúdo se estique demais em telas muito grandes.
-*/
 header, main, footer {
     width: 100%;
-    max-width: 1200px; /* Largura máxima do conteúdo */
-    margin: 0 auto;    /* Centraliza o conteúdo na tela */
-    padding: var(--espaco-md) var(--espaco-lg); /* Espaçamento interno (vertical, horizontal) */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--espaco-md) var(--espaco-lg);
 }
 
 /* ========================================= */
@@ -79,30 +67,26 @@ header {
 }
 
 header nav {
-    /* REQUISITO: Utilizar flexbox para componentes internos
-      Usamos Flexbox para alinhar o logo (à esquerda) e o menu (à direita).
-    */
     display: flex;
-    justify-content: space-between; /* Coloca espaço entre o logo e o menu */
-    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between;
+    align-items: center;
 }
 
 header nav ul {
-    list-style: none; /* Remove as "bolinhas" da lista */
-    display: flex; /* Alinha os itens do menu horizontalmente */
-    gap: var(--espaco-md); /* Adiciona um espaço entre cada item do menu */
+    list-style: none;
+    display: flex;
+    gap: var(--espaco-md);
 }
 
 header nav ul li a {
-    text-decoration: none; /* Remove o sublinhado do link */
+    text-decoration: none;
     color: var(--cor-primaria);
     font-weight: bold;
     padding: var(--espaco-xs) var(--espaco-sm);
-    border-radius: 4px; /* Bordas levemente arredondadas */
-    transition: all 0.3s ease; /* Efeito suave de transição */
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
-/* REQUISITO: Criar botões com estados visuais (hover, focus) */
 header nav ul li a:hover,
 header nav ul li a:focus {
     background-color: var(--cor-primaria);
@@ -135,144 +119,121 @@ footer p {
 /* ========================================= */
 /* 6. COMPONENTES: BOTÕES (BUTTONS)          */
 /* ========================================= */
-/* Requisito: Criar botões com estados visuais */
 .btn {
     display: inline-block;
     font-weight: bold;
     text-align: center;
-    text-decoration: none; /* Remove sublinhado do link/botão */
+    text-decoration: none;
     cursor: pointer;
-    padding: var(--espaco-xs) var(--espaco-sm); /* 8px 16px */
+    padding: var(--espaco-xs) var(--espaco-sm);
     border: 1px solid transparent;
     border-radius: 4px;
-    font-size: var(--fonte-corpo-md); /* 16px */
+    font-size: var(--fonte-corpo-md);
     transition: all 0.3s ease;
-    margin-top: var(--espaco-sm); /* 16px de margem acima */
+    margin-top: var(--espaco-sm);
 }
 
-/* Botão Secundário (Verde da nossa paleta) */
 .btn-secundario {
     background-color: var(--cor-secundaria);
     color: var(--cor-branca);
     border-color: var(--cor-secundaria);
 }
 
-/* REQUISITO: Estados visuais (hover, focus, active)
-  Isso faz o botão reagir ao mouse e ao teclado.
-*/
 .btn-secundario:hover,
 .btn-secundario:focus {
-    background-color: #218838; /* Um tom de verde mais escuro */
+    background-color: #218838;
     border-color: #1e7e34;
     color: var(--cor-branca);
-    outline: none; /* Remove a borda azul padrão do foco */
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5); /* Sombra de foco para acessibilidade */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
 }
 
 /* ========================================= */
 /* 7. COMPONENTES: CARDS DE PROJETO          */
 /* ========================================= */
-/* Requisito: Desenvolver sistema de cards responsivos */
-
 .projetos-container {
-    /* Usamos Flexbox para organizar os cards. 
-      'flex-wrap' permite que eles quebrem a linha em telas menores.
-    */
     display: flex;
     flex-wrap: wrap; 
-    gap: var(--espaco-lg); /* Espaço de 32px entre os cards */
-    justify-content: center; /* Centraliza o card (ou cards) se houver espaço */
+    gap: var(--espaco-lg);
+    justify-content: center;
 }
 
 .card-projeto {
-    /* Define o tamanho base do card. 
-      'flex-grow: 1' permite que ele cresça.
-    */
-    flex-basis: 350px; /* Largura mínima do card */
+    flex-basis: 350px;
     flex-grow: 1;
-    max-width: 450px; /* Largura máxima do card */
-    
+    max-width: 450px;
     background-color: var(--cor-branca);
     border: 1px solid var(--cor-neutra-media);
-    border-radius: 8px; /* Bordas arredondadas */
-    overflow: hidden; /* Garante que a imagem não "vaze" das bordas */
-    
-    /* Sombra suave para dar elevação ao card */
+    border-radius: 8px;
+    overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efeito de flutuar no hover */
 .card-projeto:hover {
-    transform: translateY(-5px); /* Move o card 5px para cima */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra mais forte */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .card-projeto img {
-    width: 100%; /* Imagem ocupa 100% da largura do card */
-    height: auto; /* Mantém a proporção */
-    display: block; /* Remove espaço extra abaixo da imagem */
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .card-projeto-conteudo {
-    padding: var(--espaco-md); /* 24px de espaçamento interno */
+    padding: var(--espaco-md);
 }
 
 .card-projeto-conteudo h3 {
-    font-size: var(--fonte-titulo-md); /* 24px */
+    font-size: var(--fonte-titulo-md);
     color: var(--cor-neutra-escura);
-    margin-bottom: var(--espaco-sm); /* 16px de margem abaixo do título */
+    margin-bottom: var(--espaco-sm);
 }
 
 .card-projeto-conteudo p {
-    font-size: var(--fonte-corpo-md); /* 16px */
+    font-size: var(--fonte-corpo-md);
     line-height: 1.6;
-    margin-bottom: var(--espaco-sm); /* 16px de margem abaixo do parágrafo */
+    margin-bottom: var(--espaco-sm);
 }
 
 /* ========================================= */
 /* 8. COMPONENTES: FORMULÁRIOS ESTILIZADOS   */
 /* ========================================= */
-
-/* Define uma margem maior entre os grupos de campos */
 fieldset {
     border: 1px solid var(--cor-neutra-media);
-    border-radius: 8px; /* Bordas arredondadas */
-    padding: var(--espaco-md); /* 24px */
-    margin-bottom: var(--espaco-lg); /* 32px */
+    border-radius: 8px;
+    padding: var(--espaco-md);
+    margin-bottom: var(--espaco-lg);
 }
 
-/* Estiliza o título do grupo de campos */
 legend {
-    font-size: var(--fonte-titulo-md); /* 24px */
+    font-size: var(--fonte-titulo-md);
     font-weight: bold;
     color: var(--cor-primaria);
-    padding: 0 var(--espaco-xs); /* 0 8px */
-    margin-left: var(--espaco-sm); /* 16px */
+    padding: 0 var(--espaco-xs);
+    margin-left: var(--espaco-sm);
 }
 
-/* Define o espaçamento entre cada campo (label + input) */
 form div {
-    margin-bottom: var(--espaco-sm); /* 16px */
+    margin-bottom: var(--espaco-sm);
 }
 
-/* Estiliza as etiquetas (labels) */
 form label {
-    display: block; /* Faz a label ocupar a própria linha */
+    display: block;
     font-weight: bold;
-    margin-bottom: var(--espaco-xs); /* 8px de espaço até o input */
+    margin-bottom: var(--espaco-xs);
 }
 
-/* Estiliza todos os campos de input */
 form input[type="text"],
 form input[type="email"],
 form input[type="date"],
 form input[type="tel"] {
-    width: 100%; /* Faz o input ocupar 100% da largura */
-    padding: var(--espaco-sm); /* 16px (para ficar mais "alto" e fácil de clicar) */
+    width: 100%;
+    padding: var(--espaco-sm);
     border: 1px solid var(--cor-neutra-media);
     border-radius: 4px;
-    font-size: var(--fonte-corpo-md); /* 16px */
+    font-size: var(--fonte-corpo-md);
     background-color: var(--cor-branca);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -280,10 +241,6 @@ form input[type="tel"] {
 /* ================================================= */
 /* 9. VALIDAÇÃO VISUAL E ESTADOS DE FOCO             */
 /* ================================================= */
-
-/* REQUISITO: Criar botões com estados visuais (hover, focus)
-   Estilo para o botão de envio principal (Azul)
-*/
 .btn-primario {
     background-color: var(--cor-primaria);
     color: var(--cor-branca);
@@ -296,140 +253,109 @@ form input[type="tel"] {
     border-color: var(--cor-primaria-escura);
     color: var(--cor-branca);
     outline: none;
-    /* Sombra de foco azul para acessibilidade */
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); 
 }
 
-/* --- VALIDAÇÃO VISUAL REQUERIDA --- */
-
 /* 1. Estado de Foco Padrão (azul) */
-/* Quando o usuário clica em um campo */
 form input:focus {
     border-color: var(--cor-primaria);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-    outline: none; /* Remove a borda padrão do navegador */
+    outline: none;
 }
 
-/* 2. Estado Inválido (vermelho) */
-/* REQUISITO: Implementar formulários estilizados com validação visual 
-   A pseudo-classe :invalid é ativada quando o campo é 'required' e está vazio,
-   ou quando o tipo (ex: 'email') não é válido.
-*/
+/* 2. Estado Inválido (vermelho) - HTML Padrão (para 'pattern') */
 form input:invalid {
-    border-color: var(--cor-perigo); /* Borda vermelha */
+    border-color: var(--cor-perigo);
 }
 
 /* 3. Estado Inválido e em Foco (vermelho) */
-/* Quando o usuário está digitando em um campo inválido */
 form input:invalid:focus {
     border-color: var(--cor-perigo);
-    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5); /* Sombra vermelha */
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);
 }
 
-/* 4. Estado Válido (verde) - Opcional, mas bom */
-/* Quando o campo é 'required' e foi preenchido corretamente */
-form input:valid {
-    border-color: var(--cor-secundaria); /* Borda verde */
-}
-
-/* 5. Estado Válido e em Foco (verde) */
-form input:valid:focus {
+/* 4. Estado Válido (verde) - Controlado pelo JavaScript */
+form input.is-valid {
     border-color: var(--cor-secundaria);
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5); /* Sombra verde */
+}
+
+/* 5. Estado Válido e em Foco (verde) - Controlado pelo JavaScript */
+form input.is-valid:focus {
+    border-color: var(--cor-secundaria);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
 }
 
 /* ========================================= */
 /* 10. NAVEGAÇÃO RESPONSIVA E MENU HAMBÚRGUER */
 /* ========================================= */
-
-/* Esconde o menu hambúrguer por padrão em telas grandes */
 .hamburger-menu {
     display: none; 
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
-    z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+    z-index: 1000;
 }
 
-/* Estilo das "barras" do hambúrguer */
 .hamburger-menu .bar {
     display: block;
     width: 25px;
     height: 3px;
     background-color: var(--cor-neutra-escura);
     margin: 5px 0;
-    transition: 0.4s; /* Transição suave para animação */
+    transition: 0.4s;
     border-radius: 2px;
 }
 
-/* Modifica o logo-link para ter margem direita em mobile */
 .main-nav .logo-link {
-    margin-right: auto; /* Empurra o menu para a direita em mobile */
+    margin-right: auto;
 }
 
-/* ESTILOS PARA TELAS MENORES (MOBILE) */
-/* REQUISITO: Criar no mínimo 5 breakpoints responsivos */
-/* Primeiro breakpoint (ex: para tablets e celulares grandes) */
 @media (max-width: 768px) {
     header nav {
-        flex-wrap: wrap; /* Permite que os itens quebrem a linha */
-        justify-content: space-between; /* Logo à esquerda, hambúrguer à direita */
+        flex-wrap: wrap;
+        justify-content: space-between;
         padding: var(--espaco-sm);
     }
-
     .hamburger-menu {
-        display: block; /* Mostra o botão hambúrguer */
+        display: block;
     }
-
     .nav-list {
-        /* Esconde o menu principal em mobile por padrão */
         display: none; 
-        flex-direction: column; /* Itens do menu um abaixo do outro */
-        width: 100%; /* Ocupa a largura total */
+        flex-direction: column;
+        width: 100%;
         background-color: var(--cor-branca);
-        position: absolute; /* Posiciona o menu abaixo do header */
-        top: 60px; /* Ajuste conforme a altura do seu header */
+        position: absolute;
+        top: 60px;
         left: 0;
         box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         padding: var(--espaco-sm) 0;
         border-top: 1px solid var(--cor-neutra-media);
         z-index: 999;
     }
-
     .nav-list.active {
-        display: flex; /* Mostra o menu quando estiver "ativo" (via JS) */
+        display: flex;
     }
-
     .nav-list li {
         width: 100%;
         text-align: center;
     }
-
     .nav-list li a {
-        display: block; /* Faz o link ocupar a largura total do item */
-        padding: var(--espaco-md) var(--espaco-lg); /* Aumenta a área clicável */
+        display: block;
+        padding: var(--espaco-md) var(--espaco-lg);
         border-radius: 0;
     }
 }
 
 /* ========================================= */
-/* 11. ANIMAÇÃO DO MENU HAMBÚRGUER (X)       */
+/* 11. ANIMAÇÃO DO BOTÃO HAMBÚRGUER (EM X)   */
 /* ========================================= */
-
-/* Quando o botão hambúrguer também tiver a classe 'active'... */
-
-/* Gira a barra do meio para desaparecer */
 .hamburger-menu.active .bar:nth-child(2) {
     opacity: 0;
 }
-
-/* Gira a primeira barra para formar o 'X' */
 .hamburger-menu.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
-
-/* Gira a terceira barra para formar o 'X' */
 .hamburger-menu.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
@@ -437,37 +363,29 @@ form input:valid:focus {
 /* ========================================= */
 /* 12. COMPONENTES: BADGES E TAGS            */
 /* ========================================= */
-
-/* Container para alinhar as badges (caso tenha mais de uma) */
 .badge-container {
-    margin-bottom: var(--espaco-sm); /* 16px de espaço abaixo das badges */
+    margin-bottom: var(--espaco-sm);
     display: flex;
     flex-wrap: wrap;
-    gap: var(--espaco-xs); /* 8px de espaço entre as badges */
+    gap: var(--espaco-xs);
 }
-
-/* Estilo base da badge */
 .badge {
     display: inline-block;
-    padding: 0.35em 0.65em; /* Espaçamento interno (vertical, horizontal) */
-    font-size: var(--fonte-corpo-sm); /* 14px */
+    padding: 0.35em 0.65em;
+    font-size: var(--fonte-corpo-sm);
     font-weight: bold;
     line-height: 1;
     color: var(--cor-branca);
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: 10rem; /* Borda bem arredondada (pílula) */
+    border-radius: 10rem;
 }
-
-/* Cor específica para a badge de Educação (usando a cor primária) */
 .badge-educacao {
     background-color: var(--cor-primaria);
 }
-
-/* (Exemplo de outra cor, se precisar no futuro) */
 .badge-saude {
-    background-color: var(--cor-secundaria); /* Verde */
+    background-color: var(--cor-secundaria);
 }
 
 /* ========================================= */
@@ -475,73 +393,65 @@ form input:valid:focus {
 /* ========================================= */
 
 .alert {
-    padding: var(--espaco-md); /* 24px */
-    margin-bottom: var(--espaco-lg); /* 32px */
+    display: none; /* CORREÇÃO: Escondido por padrão */
+    padding: var(--espaco-md);
+    margin-bottom: var(--espaco-lg);
     border: 1px solid transparent;
-    border-radius: 8px; /* Bordas arredondadas */
-    font-size: var(--fonte-corpo-md); /* 16px */
+    border-radius: 8px;
+    font-size: var(--fonte-corpo-md);
 }
 
-/* Cor de Alerta de Sucesso (Verde) */
+/* CORREÇÃO: Nova classe para mostrar o alerta via JS */
+.alert.is-visible {
+    display: block;
+}
+
 .alert-sucesso {
-    color: #155724; /* Texto verde escuro */
-    background-color: #d4edda; /* Fundo verde claro */
-    border-color: #c3e6cb; /* Borda verde */
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
 }
-
-/* Cor de Alerta de Perigo (Vermelho) */
 .alert-perigo {
-    color: #721c24; /* Texto vermelho escuro */
-    background-color: #f8d7da; /* Fundo vermelho claro */
-    border-color: #f5c6cb; /* Borda vermelha */
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
 }
-
 .alert strong {
-    font-weight: bold; /* Deixa a primeira palavra em negrito */
+    font-weight: bold;
 }
 
 /* ========================================= */
 /* 14. NAVEGAÇÃO: SUBMENU DROPDOWN (DESKTOP) */
 /* ========================================= */
-
-/* O container do dropdown (o <li> pai) */
 .nav-list li.dropdown {
-    position: relative; /* Contexto para o menu absoluto */
+    position: relative;
 }
-
-/* O menu dropdown (a <ul> filha) */
 .dropdown-menu {
-    display: none; /* Escondido por padrão */
-    position: absolute; /* Flutua abaixo do item pai */
-    top: 100%; /* Começa logo abaixo do item pai */
+    display: none;
+    position: absolute;
+    top: 100%;
     left: 0;
     background-color: var(--cor-branca);
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     border-radius: 4px;
-    min-width: 220px; /* Largura mínima do dropdown */
-    list-style: none; /* Remove bolinhas */
+    min-width: 220px;
+    list-style: none;
     z-index: 1000;
-    padding: var(--espaco-xs) 0; /* Espaço de 8px em cima/baixo */
+    padding: var(--espaco-xs) 0;
 }
-
-/* Gatilho: Mostra o dropdown quando o <li> pai está em hover */
 .nav-list li.dropdown:hover .dropdown-menu {
     display: block;
 }
-
-/* Itens do menu dropdown */
 .dropdown-menu li {
     width: 100%;
 }
-
 .dropdown-menu li a {
-    display: block; /* Faz o link ocupar o item todo */
-    padding: var(--espaco-sm) var(--espaco-md); /* 16px 24px */
+    display: block;
+    padding: var(--espaco-sm) var(--espaco-md);
     color: var(--cor-primaria);
     text-decoration: none;
     transition: background-color 0.3s ease;
 }
-
 .dropdown-menu li a:hover,
 .dropdown-menu li a:focus {
     background-color: var(--cor-neutra-clara);
@@ -551,39 +461,25 @@ form input:valid:focus {
 /* 15. AJUSTES DROPDOWN (MOBILE)             */
 /* ========================================= */
 @media (max-width: 768px) {
-    /* No mobile, não queremos um menu flutuante.
-       O dropdown deve se comportar como parte da lista vertical. */
-    
     .dropdown-menu {
-        display: block; /* Sempre visível quando o menu mobile está aberto */
-        position: static; /* Remove o flutuador */
-        background-color: transparent; /* Fundo transparente (pega o do menu) */
-        box-shadow: none; /* Remove sombra */
-        min-width: auto; /* Largura automática */
-        padding: 0; /* Remove padding */
+        display: block;
+        position: static;
+        background-color: transparent;
+        box-shadow: none;
+        min-width: auto;
+        padding: 0;
     }
-    
-    /* Estilo dos sub-itens no mobile */
     .dropdown-menu li a {
-        /* Adiciona um recuo para mostrar que são sub-itens */
-        padding-left: var(--espaco-xl); /* 48px */
-        font-size: var(--fonte-corpo-sm); /* 14px */
-        color: var(--cor-primaria-escura); /* Cor um pouco diferente */
+        padding-left: var(--espaco-xl);
+        font-size: var(--fonte-corpo-sm);
+        color: var(--cor-primaria-escura);
     }
-    
     .dropdown-menu li a:hover {
         background-color: var(--cor-neutra-media);
     }
-    
-    /* Remove o hover de desktop */
     .nav-list li.dropdown:hover .dropdown-menu {
         display: none; 
-        /* Importante: No mobile, o menu só abre com a classe '.active' 
-           adicionada pelo JS, não pelo hover. */
     }
-    
-    /* Quando o menu mobile está ativo, o submenu (que é 'display: block') 
-       aparecerá naturalmente. */
     .nav-list.active li.dropdown .dropdown-menu {
         display: block;
     }
@@ -591,52 +487,28 @@ form input:valid:focus {
 
 /* ========================================= */
 /* 16. SISTEMA DE GRID (12 COLUNAS)          */
-/* REQUISITO OBRIGATÓRIO DA ENTREGA II       */
 /* ========================================= */
-
-/* O .row é o container que usará Flexbox para alinhar as colunas */
 .row {
     display: flex;
-    flex-wrap: wrap; /* Permite que as colunas quebrem a linha */
-    
-    /* Um "hack" comum de grid:
-       Colunas terão padding (ex: 15px). A linha (row) usa margem
-       negativa para "puxar" o conteúdo para fora e alinhar
-       com o container pai perfeitamente. */
+    flex-wrap: wrap;
     margin-left: -15px;
     margin-right: -15px;
 }
-
-/* Estilo base para TODAS as colunas.
-  Por padrão (Mobile First), toda coluna ocupa 100% da largura.
-*/
 [class*="col-"] {
     position: relative;
     width: 100%;
-    
-    /* Este é o espaçamento interno (gutter) entre as colunas */
     padding-left: 15px;
     padding-right: 15px;
-    
-    /* Adiciona um espaço embaixo da coluna em telas pequenas */
     margin-bottom: var(--espaco-md);
 }
 
 /* ========================================= */
 /* 17. BREAKPOINTS (5 OBRIGATÓRIOS)          */
 /* ========================================= */
-
-/* Usamos 'min-width' (Mobile First). Os estilos se aplicam
-  DAQUELE TAMANHO PARA CIMA.
-*/
-
-/* BREAKPOINT 1: Small (sm) >= 576px (Celulares maiores) */
 @media (min-width: 576px) {
-    /* Remove a margem inferior em telas maiores */
     [class*="col-"] {
         margin-bottom: 0;
     }
-
     .col-sm-1 { flex: 0 0 8.33333%; max-width: 8.33333%; }
     .col-sm-2 { flex: 0 0 16.66667%; max-width: 16.66667%; }
     .col-sm-3 { flex: 0 0 25%; max-width: 25%; }
@@ -650,9 +522,6 @@ form input:valid:focus {
     .col-sm-11 { flex: 0 0 91.66667%; max-width: 91.66667%; }
     .col-sm-12 { flex: 0 0 100%; max-width: 100%; }
 }
-
-/* BREAKPOINT 2: Medium (md) >= 768px (Tablets) */
-/* (Já tínhamos um breakpoint aqui, mas este é específico para o grid) */
 @media (min-width: 768px) {
     .col-md-1 { flex: 0 0 8.33333%; max-width: 8.33333%; }
     .col-md-2 { flex: 0 0 16.66667%; max-width: 16.66667%; }
@@ -667,8 +536,6 @@ form input:valid:focus {
     .col-md-11 { flex: 0 0 91.66667%; max-width: 91.66667%; }
     .col-md-12 { flex: 0 0 100%; max-width: 100%; }
 }
-
-/* BREAKPOINT 3: Large (lg) >= 992px (Desktops pequenos) */
 @media (min-width: 992px) {
     .col-lg-1 { flex: 0 0 8.33333%; max-width: 8.33333%; }
     .col-lg-2 { flex: 0 0 16.66667%; max-width: 16.66667%; }
@@ -683,8 +550,6 @@ form input:valid:focus {
     .col-lg-11 { flex: 0 0 91.66667%; max-width: 91.66667%; }
     .col-lg-12 { flex: 0 0 100%; max-width: 100%; }
 }
-
-/* BREAKPOINT 4: Extra Large (xl) >= 1200px (Desktops) */
 @media (min-width: 1200px) {
     .col-xl-1 { flex: 0 0 8.33333%; max-width: 8.33333%; }
     .col-xl-2 { flex: 0 0 16.66667%; max-width: 16.66667%; }
@@ -699,8 +564,6 @@ form input:valid:focus {
     .col-xl-11 { flex: 0 0 91.66667%; max-width: 91.66667%; }
     .col-xl-12 { flex: 0 0 100%; max-width: 100%; }
 }
-
-/* BREAKPOINT 5: Extra Extra Large (xxl) >= 1400px (Desktops grandes) */
 @media (min-width: 1400px) {
     .col-xxl-1 { flex: 0 0 8.33333%; max-width: 8.33333%; }
     .col-xxl-2 { flex: 0 0 16.66667%; max-width: 16.66667%; }
@@ -714,4 +577,25 @@ form input:valid:focus {
     .col-xxl-10 { flex: 0 0 83.33333%; max-width: 83.33333%; }
     .col-xxl-11 { flex: 0 0 91.66667%; max-width: 91.66667%; }
     .col-xxl-12 { flex: 0 0 100%; max-width: 100%; }
+}
+
+/* ========================================= */
+/* 18. VALIDAÇÃO JS (MENSAGENS DE ERRO)      */
+/* ========================================= */
+
+.error-message {
+    display: none; 
+    color: var(--cor-perigo);
+    font-size: var(--fonte-corpo-sm);
+    font-weight: bold;
+    margin-top: var(--espaco-xs);
+}
+
+.error-message.is-visible {
+    display: block;
+}
+
+form input.is-invalid {
+    border-color: var(--cor-perigo) !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5) !important;
 }
