@@ -8,25 +8,36 @@
 </head>
 <body>
 
-    <header>
-       <nav class="main-nav">
+    <header role="banner">
+       <nav class="main-nav" aria-label="Navegação Principal">
             <a href="index.html" class="logo-link">
                 <img src="imagens/logo-ong.png" alt="Logo da ONG Salve Vidas - Voltar para Início" width="150">
             </a>
             
-            <button class="hamburger-menu" aria-label="Abrir Menu Principal">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <button class="hamburger-menu" 
+                    aria-label="Abrir Menu Principal" 
+                    aria-controls="menu-principal" 
+                    aria-expanded="false">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
             </button>
 
-            <ul class="nav-list">
-                <li><a href="index.html">Início</a></li>
+            <ul class="nav-list" id="menu-principal">
+                <li>
+                  <a href="index.html" aria-current="page">Início</a>
+                </li>
                 
                 <li class="dropdown">
-                    <a href="projetos.html" class="dropdown-toggle">Projetos ▾</a> 
+                    <button class="dropdown-toggle" 
+                            aria-haspopup="true" 
+                            aria-expanded="false" 
+                            aria-controls="submenu-projetos">
+                        Projetos ▾
+                    </button>
                     
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" id="submenu-projetos" aria-label="Submenu Projetos">
+                        <li><a href="projetos.html">Ver Todos os Projetos</a></li>
                         <li><a href="projetos.html#projetos-title">Projeto Educação</a></li>
                         <li><a href="#">Projeto Saúde (Exemplo)</a></li>
                         <li><a href="#">Projeto Moradia (Exemplo)</a></li>
@@ -35,7 +46,15 @@
                 
                 <li><a href="cadastro.html">Cadastro</a></li>
             </ul>
-        </nav>
+
+            <button class="theme-toggle" 
+                    id="theme-toggle" 
+                    aria-label="Ativar modo de alto contraste">
+                
+                <span class="icon-sun" aria-hidden="true">☀️</span> 
+                <span class="icon-moon" aria-hidden="true">🌙</span>
+            </button>
+            </nav>
     </header>
 
     <main id="main-content">
@@ -47,33 +66,34 @@
         </section>
 
 
-       <section aria-labelledby="sobre-title">
+        <section aria-labelledby="sobre-title">
             <h2 id="sobre-title">Sobre Nós</h2>
 
             <div class="row">
                 
                 <div class="col-md-6">
-                    <article>
-                        <h3>Nossa Missão</h3>
+                    <article aria-labelledby="missao-title">
+                        <h3 id="missao-title">Nossa Missão</h3>
                         <p>Nossa missão é combater a desigualdade social e promover o desenvolvimento humano em comunidades carentes, oferecendo educação, saúde e oportunidades.</p>
                     </article>
                 </div>
                 
                 <div class="col-md-6">
-                    <article>
-                        <h3>Visão e Valores</h3>
+                    <article aria-labelledby="visao-title">
+                        <h3 id="visao-title">Visão e Valores</h3>
                         <p>Acreditamos em um mundo com mais empatia, solidariedade e justiça social. Nossos valores são transparência, respeito e comprometimento.</p>
                     </article>
                 </div>
 
-            </div> </section>
+            </div> 
+        </section>
 
         
         <section aria-labelledby="contato-title">
             <h2 id="contato-title">Informações de Contato</h2>
             <p>Entre em contato conosco para parcerias, dúvidas ou mais informações.</p>
             
-            <ul>
+            <ul aria-label="Detalhes do Contato">
                 <li><strong>Email:</strong> <a href="mailto:contato@salvevidas.org">contato@salvevidas.org</a></li>
                 <li><strong>Telefone/WhatsApp:</strong> <a href="tel:+5511999998888">(11) 99999-8888</a></li>
                 <li><strong>Endereço:</strong> Rua da Esperança, 123, São Paulo - SP</li>
@@ -81,11 +101,14 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <p>&copy; 2025 ONG Salve Vidas. Todos os direitos reservados.</p>
     </footer>
 
-<script src="js/main.js"></script>
+    <script src="js/masks.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/theme.js"></script>
     <script src="js/spa.js"></script> 
 </body>
 </html>
