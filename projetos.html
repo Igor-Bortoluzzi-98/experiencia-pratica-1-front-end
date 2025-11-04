@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projetos e Como Ajudar - ONG Salve Vidas</title>
+    <title>Cadastro de Voluntários e Doadores - ONG Salve Vidas</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <header>
-        <nav>
-            <a href="index.html">
+        <nav class="main-nav">
+            <a href="index.html" class="logo-link">
                 <img src="imagens/logo-ong.png" alt="Logo da ONG Salve Vidas - Voltar para Início" width="150">
             </a>
             
-            <ul>
+            <button class="hamburger-menu" aria-label="Abrir Menu Principal">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <ul class="nav-list">
                 <li><a href="index.html">Início</a></li>
-                <li><a href="projetos.html">Projetos</a></li>
+                
+                <li class="dropdown">
+                    <a href="projetos.html" class="dropdown-toggle">Projetos ▾</a> 
+                    
+                    <ul class="dropdown-menu">
+                        <li><a href="projetos.html#projetos-title">Projeto Educação</a></li>
+                        <li><a href="#">Projeto Saúde (Exemplo)</a></li>
+                        <li><a href="#">Projeto Moradia (Exemplo)</a></li>
+                    </ul>
+                </li>
+                
                 <li><a href="cadastro.html">Cadastro</a></li>
             </ul>
         </nav>
@@ -26,14 +43,27 @@
         <p>Conheça as iniciativas que movem nossa organização e descubra como você pode fazer parte dessa mudança.</p>
 
         <section aria-labelledby="projetos-title">
-            <h2 id="projetos-title">Projetos Sociais em Andamento</h2>
+    <h2 id="projetos-title">Projetos Sociais em Andamento</h2>
+    
+    <div class="projetos-container">
+        
+        <article class="card-projeto">
+            <img src="imagens/projeto.png" alt="Sala de aula com crianças aprendendo e sorrindo" width="400">
             
-            <article>
+            <div class="card-projeto-conteudo">
+                
+                <div class="badge-container">
+                    <span class="badge badge-educacao">Educação</span>
+                </div>
+
                 <h3>Educação para o Futuro</h3>
-                <img src="imagens/projeto-1.png" alt="Sala de aula com crianças aprendendo e sorrindo" width="400">
                 <p>Oferecemos aulas de reforço escolar, informática e artes para crianças e adolescentes em comunidades carentes, preparando-os para um futuro melhor e mais digno.</p>
-            </article>
-        </section>
+
+                <a href="#" class="btn btn-secundario">Saiba Mais</a>
+            </div>
+        </article>
+        </div>
+</section>
 
         <section aria-labelledby="voluntariado-title">
             <h2 id="voluntariado-title">Seja um Voluntário</h2>
@@ -73,6 +103,6 @@
     </main> <footer>
         <p>&copy; 2025 ONG Salve Vidas. Todos os direitos reservados.</p>
     </footer>
-
+<script src="js/main.js"></script>
 </body>
 </html>

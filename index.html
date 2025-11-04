@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONG Salve Vidas - Página Inicial</title>
+    <title>Cadastro de Voluntários e Doadores - ONG Salve Vidas</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <header>
-        <nav>
-            <a href="index.html">
-                <img src="imagens/logo-ong.png" alt="Logo da ONG Salve Vidas - Página Inicial" width="150"> 
+       <nav class="main-nav">
+            <a href="index.html" class="logo-link">
+                <img src="imagens/logo-ong.png" alt="Logo da ONG Salve Vidas - Voltar para Início" width="150">
             </a>
             
-            <ul>
+            <button class="hamburger-menu" aria-label="Abrir Menu Principal">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <ul class="nav-list">
                 <li><a href="index.html">Início</a></li>
-                <li><a href="projetos.html">Projetos</a></li>
+                
+                <li class="dropdown">
+                    <a href="projetos.html" class="dropdown-toggle">Projetos ▾</a> 
+                    
+                    <ul class="dropdown-menu">
+                        <li><a href="projetos.html#projetos-title">Projeto Educação</a></li>
+                        <li><a href="#">Projeto Saúde (Exemplo)</a></li>
+                        <li><a href="#">Projeto Moradia (Exemplo)</a></li>
+                    </ul>
+                </li>
+                
                 <li><a href="cadastro.html">Cadastro</a></li>
             </ul>
         </nav>
@@ -29,20 +46,29 @@
             <img src="imagens/banner-home.png" alt="Voluntários da ONG Salve Vidas interagindo e ajudando crianças sorrindo" width="800">
         </section>
 
-        <section aria-labelledby="sobre-title">
-            <h2 id="sobre-title">Sobre Nós</h2>
-            
-            <article>
-                <h3>Nossa Missão</h3>
-                <p>Nossa missão é combater a desigualdade social e promover o desenvolvimento humano em comunidades carentes, oferecendo educação, saúde e oportunidades.</p>
-            </article>
-            
-            <article>
-                <h3>Visão e Valores</h3>
-                <p>Acreditamos em um mundo com mais empatia, solidariedade e justiça social. Nossos valores são transparência, respeito e comprometimento.</p>
-            </article>
-        </section>
 
+       <section aria-labelledby="sobre-title">
+            <h2 id="sobre-title">Sobre Nós</h2>
+
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <article>
+                        <h3>Nossa Missão</h3>
+                        <p>Nossa missão é combater a desigualdade social e promover o desenvolvimento humano em comunidades carentes, oferecendo educação, saúde e oportunidades.</p>
+                    </article>
+                </div>
+                
+                <div class="col-md-6">
+                    <article>
+                        <h3>Visão e Valores</h3>
+                        <p>Acreditamos em um mundo com mais empatia, solidariedade e justiça social. Nossos valores são transparência, respeito e comprometimento.</p>
+                    </article>
+                </div>
+
+            </div> </section>
+
+        
         <section aria-labelledby="contato-title">
             <h2 id="contato-title">Informações de Contato</h2>
             <p>Entre em contato conosco para parcerias, dúvidas ou mais informações.</p>
@@ -59,5 +85,6 @@
         <p>&copy; 2025 ONG Salve Vidas. Todos os direitos reservados.</p>
     </footer>
 
+<script src="js/main.js"></script>
 </body>
 </html>
