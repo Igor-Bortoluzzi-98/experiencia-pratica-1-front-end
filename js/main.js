@@ -1,24 +1,93 @@
 /* ARQUIVO: js/main.js 
-   Script principal para interações do site (ex: menu hambúrguer)
+  Script principal para interações do site (menus acessíveis)
+  ENTREGA IV - Acessibilidade
 */
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Seleciona o botão hambúrguer e a lista de navegação
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const navList = document.querySelector('.nav-list');
+(function() {
 
-    // Verifica se os elementos existem na página
-    if (hamburgerMenu && navList) {
+    // 1. Colocamos toda a lógica de menu dentro de uma função
+    function initializeMenus() {
         
-        // Adiciona um "escutador" de clique ao botão
-        hamburgerMenu.addEventListener('click', function() {
+        // --- LÓGICA DO MENU HAMBÚRGUER (MOBILE) ---
+        // Seleciona os botões DENTRO do <main> atual
+        const mainContent = document.querySelector('body');
+        const hamburgerMenu = mainContent.querySelector('.hamburger-menu');
+        const navList = mainContent.querySelector('.nav-list');
+
+        if (hamburgerMenu && navList) {
+            // Clona o botão para remover "escutadores" antigos
+            const hamburgerClone = hamburgerMenu.cloneNode(true);
+            hamburgerMenu.parentNode.replaceChild(hamburgerClone, hamburgerMenu);
             
-            // Alterna a classe 'active' no menu (para mostrar/esconder)
-            navList.classList.toggle('active');
-            
-            // Alterna a classe 'active' no botão (para animar o 'X')
-            hamburgerMenu.classList.toggle('active');
-        });
+            hamburgerClone.addEventListener('click', function() {
+                navList.classList.toggle('active');
+                hamburgerClone.classList.toggle('active');
+                
+                const isExpanded = hamburgerClone.getAttribute('aria-expanded') === 'true';
+                hamburgerClone.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+
+        // --- LÓGICA DO MENU DROPDOWN "PROJETOS" ---
+        const dropdownToggle = mainContent.querySelector('.dropdown-toggle');
+        const dropdownMenu = mainContent.querySelector('.dropdown-menu');
+        const dropdownParent = mainContent.querySelector('.dropdown');
+
+        if (dropdownToggle && dropdownMenu && dropdownParent) {
+            // Clona o botão para remover "escutadores" antigos
+            const dropdownClone = dropdownToggle.cloneNode(true);
+            dropdownToggle.parentNode.replaceChild(dropdownClone, dropdownToggle);
+
+            dropdownClone.addEventListener('click', function() {
+                dropdownParent.classList.toggle('active');
+                
+                const isExpanded = dropdownClone.getAttribute('aria-expanded') === 'true';
+                dropdownClone.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
     }
-});
+
+    // --- 2. Lógica de "Fechar ao Clicar Fora" ---
+    function initializeClickOutside() {
+        // Garante que só há um "escutador" de clique no documento
+        document.removeEventListener('click', handleOutsideClick); // Remove o antigo
+        document.addEventListener('click', handleOutsideClick); // Adiciona o novo
+    }
+    
+    function handleOutsideClick(event) {
+        if (!event.target.closest('header')) {
+            const navList = document.querySelector('.nav-list');
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const dropdownParent = document.querySelector('.dropdown');
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+
+            if (navList && navList.classList.contains('active')) {
+                navList.classList.remove('active');
+                if (hamburgerMenu) {
+                    hamburgerMenu.classList.remove('active');
+                    hamburgerMenu.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            if (dropdownParent && dropdownParent.classList.contains('active')) {
+                dropdownParent.classList.remove('active');
+                if (dropdownToggle) {
+                    dropdownToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+        }
+    }
+
+
+    // --- 3. INICIALIZAÇÃO (MUDANÇA) ---
+    
+    // Roda quando a página carrega pela primeira vez
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeMenus();
+        initializeClickOutside(); 
+    });
+
+    // Roda toda vez que o SPA carregar uma nova página
+    document.body.addEventListener('page-loaded', initializeMenus);
+
+})();

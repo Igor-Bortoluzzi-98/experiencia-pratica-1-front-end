@@ -4,127 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Voluntários e Doadores - ONG Salve Vidas</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.min.css">
 </head>
 <body>
 
-    <header>
-        <nav class="main-nav">
+    <header role="banner">
+       <nav class="main-nav" aria-label="Navegação Principal">
             <a href="index.html" class="logo-link">
                 <img src="imagens/logo-ong.png" alt="Logo da ONG Salve Vidas - Voltar para Início" width="150">
             </a>
             
-            <button class="hamburger-menu" aria-label="Abrir Menu Principal">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <button class="hamburger-menu" 
+                    aria-label="Abrir Menu Principal" 
+                    aria-controls="menu-principal" 
+                    aria-expanded="false">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
             </button>
 
-            <ul class="nav-list">
+            <ul class="nav-list" id="menu-principal">
                 <li><a href="index.html">Início</a></li>
                 
                 <li class="dropdown">
-                    <a href="projetos.html" class="dropdown-toggle">Projetos ▾</a> 
+                    <button class="dropdown-toggle" 
+                            aria-haspopup="true" 
+                            aria-expanded="false" 
+                            aria-controls="submenu-projetos">
+                        Projetos ▾
+                    </button>
                     
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" id="submenu-projetos" aria-label="Submenu Projetos">
+                        <li><a href="projetos.html">Ver Todos os Projetos</a></li>
                         <li><a href="projetos.html#projetos-title">Projeto Educação</a></li>
                         <li><a href="#">Projeto Saúde (Exemplo)</a></li>
                         <li><a href="#">Projeto Moradia (Exemplo)</a></li>
                     </ul>
                 </li>
                 
-                <li><a href="cadastro.html">Cadastro</a></li>
+                <li>
+                  <a href="cadastro.html" aria-current="page">Cadastro</a>
+                </li>
             </ul>
+
+            <button class="theme-toggle" 
+                    id="theme-toggle" 
+                    aria-label="Ativar modo de alto contraste">
+                <span class="icon-sun" aria-hidden="true">☀️</span> 
+                <span class="icon-moon" aria-hidden="true">🌙</span>
+            </button>
         </nav>
     </header>
 
     <main id="main-content">
-        <div class="alert alert-sucesso" role="alert">
+        <div class="alert alert-sucesso" role="alert" aria-live="polite">
             <strong>Sucesso!</strong> Seu cadastro foi enviado.
         </div>
         
-        <div class="alert alert-perigo" role="alert">
+        <div class="alert alert-perigo" role="alert" aria-live="assertive">
             <strong>Erro!</strong> Por favor, corrija os campos em vermelho.
         </div>
 
         <h1>Formulário de Cadastro</h1>
         <p>Preencha o formulário abaixo para se cadastrar como voluntário ou apoiador de nossa ONG.</p>
 
-        <form action="#" method="post">
+        <form action="#" method="post" novalidate>
             <fieldset>
                 <legend>Informações Pessoais</legend>
                 
-               <div>
+                <div>
                     <label for="nome">Nome Completo:</label>
-                    <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
-                    <small class="error-message"></small> 
+                    <input type="text" id="nome" name="nome" required 
+                           placeholder="Seu nome completo" 
+                           aria-describedby="error-nome" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-nome"></small> 
                 </div>
                 
                 <div>
                     <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" required placeholder="ex: seuemail@dominio.com">
-                    <small class="error-message"></small>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="ex: seuemail@dominio.com" 
+                           aria-describedby="error-email" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-email"></small>
                 </div>
                 
                 <div>
                     <label for="nascimento">Data de Nascimento:</label>
-                    <input type="date" id="nascimento" name="nascimento" required>
-                    <small class="error-message"></small>
+                    <input type="date" id="nascimento" name="nascimento" required 
+                           aria-describedby="error-nascimento" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-nascimento"></small>
                 </div>
                 
                 <div>
                     <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" name="cpf" 
-                           required 
+                    <input type="text" id="cpf" name="cpf" required 
                            placeholder="000.000.000-00" 
-                           maxlength="14"
-                           pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}"
-                           title="Digite um CPF no formato: 000.000.000-00">
-                    <small class="error-message"></small>
+                           maxlength="14" 
+                           pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" 
+                           title="Digite um CPF no formato: 000.000.000-00"
+                           aria-describedby="error-cpf" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-cpf"></small>
                 </div>
                 
                 <div>
                     <label for="telefone">Telefone (com DDD):</label>
-                    <input type="tel" id="telefone" name="telefone" 
-                           required 
+                    <input type="tel" id="telefone" name="telefone" required 
                            placeholder="(00) 90000-0000" 
-                           maxlength="15"
-                           pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
-                           title="Digite um telefone no formato: (00) 90000-0000 ou (00) 0000-0000">
-                    <small class="error-message"></small>       
+                           maxlength="15" 
+                           pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" 
+                           title="Digite um telefone no formato: (00) 90000-0000 ou (00) 0000-0000"
+                           aria-describedby="error-telefone" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-telefone"></small>       
                 </div>
             </fieldset>
 
             <fieldset>
                 <legend>Endereço</legend>
                 
-              <div>
+                <div>
                     <label for="cep">CEP:</label>
-                    <input type="text" id="cep" name="cep" 
-                           required 
+                    <input type="text" id="cep" name="cep" required 
                            placeholder="00000-000" 
-                           maxlength="9"
-                           pattern="[0-9]{5}-[0-9]{3}"
-                           title="Digite um CEP no formato: 00000-000">
-                    <small class="error-message"></small>
+                           maxlength="9" 
+                           pattern="[0-9]{5}-[0-9]{3}" 
+                           title="Digite um CEP no formato: 00000-000"
+                           aria-describedby="error-cep" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-cep"></small>
                 </div>
                 
                 <div>
                     <label for="endereco">Endereço (Rua, Número, Bairro):</label>
-                    <input type="text" id="endereco" name="endereco" required placeholder="Rua Exemplo, 123, Bairro Centro">
-                    <small class="error-message"></small>
+                    <input type="text" id="endereco" name="endereco" required 
+                           placeholder="Rua Exemplo, 123, Bairro Centro" 
+                           aria-describedby="error-endereco" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-endereco"></small>
                 </div>
                 
                 <div>
                     <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade" name="cidade" required placeholder="São Paulo">
-                    <small class="error-message"></small>
+                    <input type="text" id="cidade" name="cidade" required 
+                           placeholder="São Paulo" 
+                           aria-describedby="error-cidade" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-cidade"></small>
                 </div>
                 
                 <div>
                     <label for="estado">Estado (UF):</label>
-                    <input type="text" id="estado" name="estado" required placeholder="SP" maxlength="2">
-                    <small class="error-message"></small>
+                    <input type="text" id="estado" name="estado" required 
+                           placeholder="SP" maxlength="2" 
+                           aria-describedby="error-estado" 
+                           aria-invalid="false">
+                    <small class="error-message" id="error-estado"></small>
                 </div>
             </fieldset>
 
@@ -132,13 +170,14 @@
         </form>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <p>&copy; 2025 ONG Salve Vidas. Todos os direitos reservados.</p>
     </footer>
 
- <script src="js/masks.js"></script> 
-    <script src="js/main.js"></script>
-    <script src="js/validation.js"></script>
-    <script src="js/spa.js"></script> 
+    <script src="js/masks.min.js"></script>
+    <script src="js/validation.min.js"></script>
+    <script src="js/main.min.js"></script>
+    <script src="js/theme.min.js"></script>
+    <script src="js/spa.min.js"></script> 
 </body>
 </html>
