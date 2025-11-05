@@ -627,8 +627,13 @@ form input.is-invalid {
     box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5) !important;
 }
 
+
 /* ========================================= */
 /* 19. MODO ALTO CONTRASTE (ENTREGA IV)      */
+
+/* ========================================= */
+/* 19. MODO ALTO CONTRASTE (ENTREGA IV)    */
+ main
 /* ========================================= */
 
 /* --- 19.1 Estilo do Botão de Troca --- */
@@ -656,11 +661,18 @@ form input.is-invalid {
     outline: none;
 }
 
+
+/* Esconde o ícone da lua por padrão (tema claro) */
+ main
 .theme-toggle .icon-moon {
     display: none;
 }
 
 /* --- 19.2 Definição do Tema (Alto Contraste) --- */
+
+
+/* Quando o body tiver a classe, esconde o sol e mostra a lua */
+ main
 body.high-contrast .theme-toggle .icon-sun {
     display: none;
 }
@@ -668,6 +680,11 @@ body.high-contrast .theme-toggle .icon-moon {
     display: block;
 }
 
+
+/* Aqui está a mágica: REDEFINIMOS as variáveis globais.
+  O resto do seu CSS vai "herdar" essas novas cores.
+*/
+ main
 body.high-contrast {
     --cor-primaria: #FFFF00; /* Amarelo vivo */
     --cor-primaria-escura: #FFFFAA; 
@@ -681,6 +698,10 @@ body.high-contrast {
 }
 
 /* --- 19.3 Ajustes Específicos do Tema --- */
+
+/* Precisamos forçar a herança em alguns elementos */
+
+ main
 body.high-contrast {
     background-color: var(--cor-neutra-clara);
     color: var(--cor-neutra-escura);
@@ -741,3 +762,7 @@ body.high-contrast .btn-secundario {
     color: var(--cor-branca); /* Preto */
     border-color: var(--cor-primaria);
 }
+
+}
+
+ main
