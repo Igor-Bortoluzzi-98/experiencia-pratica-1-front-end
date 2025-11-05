@@ -5,23 +5,33 @@
 
 (function() {
 
+
     // Função para focar no novo conteúdo (para leitores de tela)
+main
     function focusOnNewContent(mainContainer) {
         const newHeading = mainContainer.querySelector('h1');
         
         if (newHeading) {
+ 
+            newHeading.setAttribute('tabindex', '-1');
+            newHeading.focus();
+        } else {
+
             // Adiciona tabindex="-1" para permitir foco programático
             // sem bagunçar a ordem de navegação (Tab)
             newHeading.setAttribute('tabindex', '-1');
             newHeading.focus();
         } else {
             // Fallback: foca no próprio container <main>
+ main
             mainContainer.setAttribute('tabindex', '-1');
             mainContainer.focus();
         }
     }
 
+ 
     // Função para carregar o conteúdo da página via fetch (ATUALIZADA)
+ main
     async function loadPageContent(url) {
         try {
             const response = await fetch(url);
@@ -32,6 +42,24 @@
 
             const newMainContent = newDoc.querySelector('#main-content');
             const mainContainer = document.querySelector('#main-content');
+
+
+            mainContainer.innerHTML = newMainContent.innerHTML;
+            document.title = newDoc.title;
+            focusOnNewContent(mainContainer);
+            
+            reinitializePageScripts(); // Avisa os outros scripts
+
+        } catch (error) {
+            console.error('Erro ao carregar a página:', error);
+            window.location.href = url;
+        }
+    }
+
+    // Esta função dispara o "aviso" que os outros scripts "ouvem"
+    function reinitializePageScripts() {
+        const pageLoadEvent = new CustomEvent('page-loaded');
+        document.body.dispatchEvent(pageLoadEvent);
 
             // 6. Substitui o conteúdo
             mainContainer.innerHTML = newMainContent.innerHTML;
@@ -76,19 +104,30 @@
             maskScript.defer = true; // Garante que será executado após o DOM
             document.body.appendChild(maskScript);
         }
+ main
     }
 
-    // Intercepta todos os cliques nos links de navegação
     document.body.addEventListener('click', function(event) {
         const link = event.target.closest('a');
 
+
         // Ignora links externos, links com #, ou links com target="_blank"
+ main
         if (!link || 
             !link.href.startsWith(window.location.origin) || 
             link.href.includes('#') || 
             link.target === '_blank') {
             return;
         }
+
+
+        event.preventDefault(); 
+        const url = link.href;
+
+        if (window.location.href === url) return; 
+
+        loadPageContent(url);
+
 
         // Previne o recarregamento
         event.preventDefault(); 
@@ -101,15 +140,17 @@
         loadPageContent(url);
 
         // Atualiza a URL na barra de endereço
+ main
         window.history.pushState({path: url}, '', url);
     });
 
-    // Lida com os botões "Voltar" e "Avançar" do navegador
     window.addEventListener('popstate', function(event) {
         if (event.state && event.state.path) {
             loadPageContent(event.state.path);
         } else {
+
             // Se o "state" for nulo (ex: a primeira página do histórico)
+ main
             loadPageContent(window.location.pathname);
         }
     });
