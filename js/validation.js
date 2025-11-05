@@ -5,17 +5,13 @@
 
 (function() {
 
-    // Função para rodar a lógica de validação
     function initializeValidation() {
         
-        // Seleciona o form DENTRO do <main> atual
         const mainContent = document.querySelector('#main-content');
         if (!mainContent) return;
-
         const form = mainContent.querySelector('form');
         if (!form) return; 
 
-        // 1. Seleciona os campos
         const nomeInput = mainContent.querySelector('#nome');
         const emailInput = mainContent.querySelector('#email');
         const nascimentoInput = mainContent.querySelector('#nascimento'); 
@@ -29,7 +25,6 @@
         const alertSucesso = mainContent.querySelector('.alert-sucesso');
         const alertPerigo = mainContent.querySelector('.alert-perigo');
 
-        // 2. Objeto de Erros de Validação
         const errorMessages = {
             nome: "Nome é obrigatório e deve ter mais de 3 caracteres.",
             email: "Por favor, insira um e-mail válido.",
@@ -42,41 +37,36 @@
             estado: "Estado (UF) é obrigatório e deve ter 2 letras." 
         };
 
-        // 3. Função Genérica para Mostrar Erro
         function showError(inputElement, message) {
             if (!inputElement) return;
-            
             const errorId = inputElement.getAttribute('aria-describedby');
+            if (!errorId) return;
             const errorElement = document.getElementById(errorId);
             
             if (errorElement) {
                 errorElement.textContent = message;
                 errorElement.classList.add('is-visible');
             }
-            
             inputElement.classList.add('is-invalid');
             inputElement.classList.remove('is-valid'); 
             inputElement.setAttribute('aria-invalid', 'true');
         }
 
-        // 4. Função Genérica para Limpar Erro
         function clearError(inputElement) {
             if (!inputElement) return;
-
             const errorId = inputElement.getAttribute('aria-describedby');
+            if (!errorId) return;
             const errorElement = document.getElementById(errorId);
             
             if (errorElement) {
                 errorElement.textContent = '';
                 errorElement.classList.remove('is-visible');
             }
-            
             inputElement.classList.remove('is-invalid');
             inputElement.classList.add('is-valid'); 
             inputElement.setAttribute('aria-invalid', 'false');
         }
         
-        // Funções de 5 a 13...
         function validateNome() {
             if (nomeInput && nomeInput.value.trim().length > 3) {
                 clearError(nomeInput); return true;
@@ -127,6 +117,13 @@
             const dataInputDate = new Date(nascimentoInput.value + 'T00:00:00');
             const hoje = new Date();
             const idadeMinima = 18;
+            
+            // CORREÇÃO DO BUG DE 6 DÍGITOS
+            if(dataInputDate.getFullYear() > hoje.getFullYear()) {
+                 showError(nascimentoInput, errorMessages.nascimento);
+                 return false;
+            }
+
             let idade = hoje.getFullYear() - dataInputDate.getFullYear();
             const mes = hoje.getMonth() - dataInputDate.getMonth();
             if (mes < 0 || (mes === 0 && hoje.getDate() < dataInputDate.getDate())) {
@@ -162,7 +159,6 @@
             } return false;
         }
 
-        // 14. Adiciona os "Escutadores de Eventos"
         if (nomeInput) nomeInput.addEventListener('blur', validateNome);
         if (emailInput) emailInput.addEventListener('blur', validateEmail);
         if (nascimentoInput) nascimentoInput.addEventListener('blur', validateNascimento);
@@ -173,10 +169,8 @@
         if (cidadeInput) cidadeInput.addEventListener('blur', validateCidade);
         if (estadoInput) estadoInput.addEventListener('blur', validateEstado);
         
-        // 15. Validação na Hora de Enviar o Formulário
         form.addEventListener('submit', function(event) {
             event.preventDefault(); 
-            
             const allValidations = [
                 validateNome(), validateEmail(), validateNascimento(),
                 validateCpf(), validateTelefone(), validateCep(),
@@ -195,21 +189,16 @@
                 console.log("Formulário válido. Enviando...");
                 if (alertSucesso) {
                     alertSucesso.classList.add('is-visible');
-                    alertSucesso.setAttribute('tabindex', '-1'); // Para foco
+                    alertSucesso.setAttribute('tabindex', '-1'); 
                     alertSucesso.focus();
                     window.scrollTo(0, 0); 
                 }
                 if (alertPerigo) alertPerigo.classList.remove('is-visible');
             }
         });
-        
         form.classList.add('js-validation-active');
     }
 
-    // --- MUDANÇA (ENTREGA IV) ---
-    // Roda a validação quando a página carrega
     document.addEventListener('DOMContentLoaded', initializeValidation);
-    // Roda a validação quando o SPA troca o conteúdo
     document.body.addEventListener('page-loaded', initializeValidation);
-
 })();

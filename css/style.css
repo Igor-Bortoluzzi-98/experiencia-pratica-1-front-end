@@ -76,6 +76,8 @@ header nav ul {
     list-style: none;
     display: flex;
     gap: var(--espaco-md);
+    margin: 0; /* Reset */
+    padding: 0; /* Reset */
 }
 
 header nav ul li a {
@@ -256,30 +258,25 @@ form input[type="tel"] {
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); 
 }
 
-/* 1. Estado de Foco Padrão (azul) */
 form input:focus {
     border-color: var(--cor-primaria);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
     outline: none;
 }
 
-/* 2. Estado Inválido (vermelho) - HTML Padrão (para 'pattern') */
 form input:invalid {
     border-color: var(--cor-perigo);
 }
 
-/* 3. Estado Inválido e em Foco (vermelho) */
 form input:invalid:focus {
     border-color: var(--cor-perigo);
     box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);
 }
 
-/* 4. Estado Válido (verde) - Controlado pelo JavaScript */
 form input.is-valid {
     border-color: var(--cor-secundaria);
 }
 
-/* 5. Estado Válido e em Foco (verde) - Controlado pelo JavaScript */
 form input.is-valid:focus {
     border-color: var(--cor-secundaria);
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
@@ -393,7 +390,7 @@ form input.is-valid:focus {
 /* ========================================= */
 
 .alert {
-    display: none; /* CORREÇÃO: Escondido por padrão */
+    display: none; 
     padding: var(--espaco-md);
     margin-bottom: var(--espaco-lg);
     border: 1px solid transparent;
@@ -401,7 +398,6 @@ form input.is-valid:focus {
     font-size: var(--fonte-corpo-md);
 }
 
-/* CORREÇÃO: Nova classe para mostrar o alerta via JS */
 .alert.is-visible {
     display: block;
 }
@@ -421,13 +417,35 @@ form input.is-valid:focus {
 }
 
 /* ========================================= */
-/* 14. NAVEGAÇÃO: SUBMENU DROPDOWN (DESKTOP) */
+/* 14. NAVEGAÇÃO: SUBMENU DROPDOWN (ACESSÍVEL) */
 /* ========================================= */
 .nav-list li.dropdown {
     position: relative;
 }
+
+/* O botão que controla o dropdown */
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    cursor: pointer;
+    padding: var(--espaco-xs) var(--espaco-sm);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branca);
+    outline: none;
+}
+
 .dropdown-menu {
-    display: none;
+    display: none; /* Escondido por padrão */
     position: absolute;
     top: 100%;
     left: 0;
@@ -439,12 +457,16 @@ form input.is-valid:focus {
     z-index: 1000;
     padding: var(--espaco-xs) 0;
 }
-.nav-list li.dropdown:hover .dropdown-menu {
+
+/* Mostra o menu quando o PAI (li.dropdown) tem a classe .active */
+.nav-list li.dropdown.active .dropdown-menu {
     display: block;
 }
+
 .dropdown-menu li {
     width: 100%;
 }
+
 .dropdown-menu li a {
     display: block;
     padding: var(--espaco-sm) var(--espaco-md);
@@ -452,6 +474,7 @@ form input.is-valid:focus {
     text-decoration: none;
     transition: background-color 0.3s ease;
 }
+
 .dropdown-menu li a:hover,
 .dropdown-menu li a:focus {
     background-color: var(--cor-neutra-clara);
@@ -462,13 +485,23 @@ form input.is-valid:focus {
 /* ========================================= */
 @media (max-width: 768px) {
     .dropdown-menu {
-        display: block;
         position: static;
         background-color: transparent;
         box-shadow: none;
         min-width: auto;
         padding: 0;
     }
+
+    /* Esconde por padrão no mobile */
+    .nav-list li.dropdown .dropdown-menu {
+        display: none;
+    }
+    
+    /* Mostra se o menu hambúrguer E o dropdown estiverem ativos */
+    .nav-list.active li.dropdown.active .dropdown-menu {
+        display: block;
+    }
+
     .dropdown-menu li a {
         padding-left: var(--espaco-xl);
         font-size: var(--fonte-corpo-sm);
@@ -476,12 +509,6 @@ form input.is-valid:focus {
     }
     .dropdown-menu li a:hover {
         background-color: var(--cor-neutra-media);
-    }
-    .nav-list li.dropdown:hover .dropdown-menu {
-        display: none; 
-    }
-    .nav-list.active li.dropdown .dropdown-menu {
-        display: block;
     }
 }
 
@@ -598,4 +625,119 @@ form input.is-valid:focus {
 form input.is-invalid {
     border-color: var(--cor-perigo) !important;
     box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5) !important;
+}
+
+/* ========================================= */
+/* 19. MODO ALTO CONTRASTE (ENTREGA IV)      */
+/* ========================================= */
+
+/* --- 19.1 Estilo do Botão de Troca --- */
+.theme-toggle {
+    background-color: var(--cor-neutra-clara);
+    border: 2px solid var(--cor-neutra-escura);
+    color: var(--cor-neutra-escura);
+    cursor: pointer;
+    border-radius: 50%; /* Botão redondo */
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-left: var(--espaco-sm);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+    background-color: var(--cor-neutra-media);
+    box-shadow: 0 0 0 3px var(--cor-primaria-escura);
+    outline: none;
+}
+
+.theme-toggle .icon-moon {
+    display: none;
+}
+
+/* --- 19.2 Definição do Tema (Alto Contraste) --- */
+body.high-contrast .theme-toggle .icon-sun {
+    display: none;
+}
+body.high-contrast .theme-toggle .icon-moon {
+    display: block;
+}
+
+body.high-contrast {
+    --cor-primaria: #FFFF00; /* Amarelo vivo */
+    --cor-primaria-escura: #FFFFAA; 
+    --cor-secundaria: #00FF00; /* Verde vivo */
+    --cor-perigo: #FF6666; /* Rosa/vermelho claro */
+    
+    --cor-neutra-clara: #000000;  /* Fundo preto */
+    --cor-neutra-media: #333333; /* Fundo de inputs */
+    --cor-neutra-escura: #FFFFFF; /* Texto branco */
+    --cor-branca: #000000;       /* Fundo de header/main */
+}
+
+/* --- 19.3 Ajustes Específicos do Tema --- */
+body.high-contrast {
+    background-color: var(--cor-neutra-clara);
+    color: var(--cor-neutra-escura);
+}
+
+body.high-contrast header,
+body.high-contrast main,
+body.high-contrast .card-projeto {
+    background-color: var(--cor-branca);
+    border-color: var(--cor-neutra-escura);
+    color: var(--cor-neutra-escura);
+}
+
+body.high-contrast a {
+    color: var(--cor-primaria);
+}
+
+body.high-contrast header nav ul li a,
+body.high-contrast .dropdown-toggle,
+body.high-contrast .dropdown-menu li a {
+    color: var(--cor-primaria);
+}
+
+body.high-contrast header nav ul li a:hover,
+body.high-contrast header nav ul li a:focus,
+body.high-contrast .dropdown-toggle:hover,
+body.high-contrast .dropdown-toggle:focus {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branca); /* cor-branca agora é preto */
+}
+
+body.high-contrast .dropdown-menu {
+    background-color: var(--cor-branca);
+    box-shadow: 0 8px 16px rgba(255,255,255,0.2);
+}
+
+body.high-contrast .dropdown-menu li a:hover,
+body.high-contrast .dropdown-menu li a:focus {
+    background-color: var(--cor-neutra-media);
+    color: var(--cor-primaria);
+}
+
+/* Ajuste do formulário */
+body.high-contrast form input {
+    background-color: var(--cor-neutra-media);
+    color: var(--cor-neutra-escura);
+    border-color: var(--cor-neutra-escura);
+}
+
+body.high-contrast form input:focus {
+     box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.5); /* Sombra amarela */
+}
+
+/* Ajuste dos botões */
+body.high-contrast .btn-primario,
+body.high-contrast .btn-secundario {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branca); /* Preto */
+    border-color: var(--cor-primaria);
 }

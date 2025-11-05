@@ -9,7 +9,6 @@
     function initializeMenus() {
         
         // --- LÓGICA DO MENU HAMBÚRGUER (MOBILE) ---
-        // Seleciona os botões DENTRO do <main> atual
         const mainContent = document.querySelector('body');
         const hamburgerMenu = mainContent.querySelector('.hamburger-menu');
         const navList = mainContent.querySelector('.nav-list');
@@ -49,7 +48,6 @@
 
     // --- 2. Lógica de "Fechar ao Clicar Fora" ---
     function initializeClickOutside() {
-        // Garante que só há um "escutador" de clique no documento
         document.removeEventListener('click', handleOutsideClick); // Remove o antigo
         document.addEventListener('click', handleOutsideClick); // Adiciona o novo
     }
@@ -77,7 +75,6 @@
             }
         }
     }
-
 
     // --- 3. INICIALIZAÇÃO (MUDANÇA) ---
     

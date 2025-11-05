@@ -4,12 +4,12 @@
 /* ========================================= */
 
 (function() {
-    const STORAGE_KEY = 'theme-preference'; // Chave para salvar no localStorage
+    const STORAGE_KEY = 'theme-preference'; 
     const body = document.body;
 
-    // Função para aplicar o tema (seja 'true' ou 'false')
     function applyTheme(isHighContrast) {
-        const themeToggle = document.getElementById('theme-toggle'); // Pega o botão
+        // Busca o botão DENTRO do header atual
+        const themeToggle = document.querySelector('#theme-toggle'); 
 
         if (isHighContrast) {
             body.classList.add('high-contrast');
@@ -24,46 +24,38 @@
         }
     }
 
-    // Função para "ouvir" o clique no botão
     function setupThemeToggle() {
-        const themeToggleBtn = document.getElementById('theme-toggle');
+        // Busca o botão DENTRO do header atual
+        const themeToggleBtn = document.querySelector('#theme-toggle');
         
         if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', function() {
-                // Verifica se a classe 'high-contrast' JÁ EXISTE
+            // Clona o botão para remover "escutadores" antigos
+            const themeToggleClone = themeToggleBtn.cloneNode(true);
+            themeToggleBtn.parentNode.replaceChild(themeToggleClone, themeToggleBtn);
+            
+            themeToggleClone.addEventListener('click', function() {
                 let isHighContrast = body.classList.contains('high-contrast');
-
-                // Inverte o valor (se tinha, remove, se não tinha, adiciona)
                 isHighContrast = !isHighContrast;
                 
-                // 1. Aplica a mudança visual
                 applyTheme(isHighContrast);
-                
-                // 2. Salva a preferência no localStorage
                 localStorage.setItem(STORAGE_KEY, isHighContrast);
             });
         }
     }
     
-    // Função para carregar a preferência salva
     function loadThemePreference() {
-        // Pega o valor salvo (pode ser 'true', 'false', ou null)
         const savedPreference = localStorage.getItem(STORAGE_KEY);
-        
-        // Se for 'true', aplica o tema
         applyTheme(savedPreference === 'true');
     }
 
     // --- INICIALIZAÇÃO ---
     
-    // 1. Carrega a preferência salva IMEDIATAMENTE.
-    // Isso evita o "flash" do tema claro antes do escuro.
-    loadThemePreference();
+    loadThemePreference(); // Roda imediatamente
     
-    // 2. Configura o botão quando o DOM está pronto (primeira carga)
+    // Roda na primeira carga
     document.addEventListener('DOMContentLoaded', setupThemeToggle);
     
-    // 3. Re-configura o botão toda vez que o SPA troca de página
+    // Roda toda vez que o SPA troca de página
     document.body.addEventListener('page-loaded', setupThemeToggle);
 
 })();

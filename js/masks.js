@@ -5,8 +5,6 @@
 // MUDANÇA (ENTREGA IV): Criamos uma função para poder "re-chamar"
 function initializeMasks() {
     
-    // Seleciona os inputs DENTRO do <main> atual
-    // Isso é importante para o SPA achar os campos novos
     const mainContent = document.querySelector('#main-content');
     if (!mainContent) return;
 

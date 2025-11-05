@@ -32,8 +32,7 @@
             document.title = newDoc.title;
             focusOnNewContent(mainContainer);
             
-            // --- MUDANÇA CRÍTICA AQUI ---
-            reinitializePageScripts(); // Chamada da função corrigida
+            reinitializePageScripts(); // Avisa os outros scripts
 
         } catch (error) {
             console.error('Erro ao carregar a página:', error);
@@ -41,10 +40,7 @@
         }
     }
 
-    // --- MUDANÇA CRÍTICA AQUI ---
-    // Esta função agora APENAS dispara o evento.
-    // Todos os outros scripts (main, theme, validation, MASKS)
-    // agora são responsáveis por "ouvir" este evento.
+    // Esta função dispara o "aviso" que os outros scripts "ouvem"
     function reinitializePageScripts() {
         const pageLoadEvent = new CustomEvent('page-loaded');
         document.body.dispatchEvent(pageLoadEvent);
