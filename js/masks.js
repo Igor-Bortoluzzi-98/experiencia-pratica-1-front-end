@@ -45,6 +45,29 @@ function initializeMasks() {
             e.target.value = value;
         });
     }
+
+// ==================================================
+    //  BLOCO CORRIGIDO - DATA DE NASCIMENTO (ID="nascimento")
+    // ==================================================
+    const inputData = mainContent.querySelector('#nascimento'); // <-- ID CORRIGIDO
+    if (inputData) {
+        inputData.replaceWith(inputData.cloneNode(true));
+        mainContent.querySelector('#nascimento').addEventListener('input', function(e) { // <-- ID CORRIGIDO
+            let value = e.target.value.replace(/\D/g, ''); 
+
+            // Trava o total de dígitos em 8 (ddmmyyyy)
+            if (value.length > 8) {
+                value = value.substring(0, 8);
+            }
+
+            // Aplica as barras
+            value = value.replace(/(\d{2})(\d)/, '$1/$2');       // dd/m
+            value = value.replace(/(\d{2}\/)(\d{2})(\d)/, '$1$2/$3'); // dd/mm/y
+            
+            e.target.value = value;
+        });
+    }
+    // ==================================================
 }
 
 // Roda na primeira carga da página
